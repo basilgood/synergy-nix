@@ -12,7 +12,6 @@
 
     path = with pkgs;[ coreutils synergy ];
     script = ''
-      mkdir $HOME/.synergy
       synergy-service -d
     '';
     serviceConfig = {
