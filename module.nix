@@ -1,12 +1,13 @@
 { lib, pkgs, ... }: {
   systemd.user.services.synergy = {
+    description = "Synergy 3 service";
+
     bindsTo = [ "graphical-session.target" ];
     wants = [ "graphical-session-pre.target" ];
     after = [ "graphical-session-pre.target" ];
 
     wantedBy = [ "graphical-session.target" ];
-
-    description = "Synergy 3 service";
+    path = [ pkgs.coreutils-full ];
     serviceConfig.ExecStart = ''
       mkdir $HOME/.synergy
       ${pkgs.synergy}/bin/synergy-service -d
