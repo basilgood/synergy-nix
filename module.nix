@@ -20,15 +20,15 @@
     };
   };
 
-  systemd.services.synergy = {
-    wantedBy = [ "graphical.target" ];
-    description = "Synergy 3 Login service";
-    serviceConfig.ExecStart = ''
-      ${pkgs.synergy}/bin/synergy-env -c '/opt/Synergy/resources/services/system/loginLauncher.sh'
-    '';
-    serviceConfig.Restart = "on-failure";
-    serviceConfig.RestartSec = 1;
-  };
+  # systemd.services.synergy = {
+  #   wantedBy = [ "graphical.target" ];
+  #   description = "Synergy 3 Login service";
+  #   serviceConfig.ExecStart = ''
+  #     ${pkgs.synergy}/bin/synergy-env -c '/opt/Synergy/resources/services/system/loginLauncher.sh'
+  #   '';
+  #   serviceConfig.Restart = "on-failure";
+  #   serviceConfig.RestartSec = 1;
+  # };
 
   networking.firewall.allowedTCPPorts = [ 24800 24802 24804 ];
   environment.systemPackages = [ pkgs.synergy ];

@@ -69,6 +69,8 @@
 , libappindicator-gtk3
 , libXinerama
 , callPackage
+, qt6
+, libnotify
 }:
 let
   synergy =
@@ -149,6 +151,8 @@ in
     libappindicator-gtk3
     libei
     libXinerama
+    qt6.qtbase
+    libnotify
   ];
   extraBwrapArgs = [
     "--symlink $HOME/.synergy /etc/Synergy"
