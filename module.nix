@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+let synergy = pkgs.callPackage ./env { }; in {
   systemd.user.tmpfiles.rules = [
     "d /.synergy"
   ];
@@ -10,7 +11,7 @@
     after = [ "graphical-session-pre.target" ];
     wantedBy = [ "graphical-session.target" ];
 
-    path = with pkgs;[ coreutils synergy ];
+    path = [ pkgs.coreutils synergy ];
     script = ''
       synergy-service -d
     '';
@@ -31,5 +32,5 @@
   # };
 
   networking.firewall.allowedTCPPorts = [ 24800 24802 24804 ];
-  environment.systemPackages = [ pkgs.synergy ];
+  environment.systemPackages = [ synergy ];
 }
