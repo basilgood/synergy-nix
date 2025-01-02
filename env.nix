@@ -157,9 +157,9 @@ in
       '';
     in
     ''
-      mkdir -p $out/share/{applications}
+      mkdir -p $out/share/{applications,}
       ln -sfv ${synergy}/share/icons $out/share/icons
-      ln -sfv ${desktopItem} $out/share/applications
+      ln -sfv ${desktopItem}/share/applications/synergy.desktop $out/share/applications
       ln -sfv ${writeShellScript "synergy" ''
         exec $(dirname "$0")/synergy-env -c "exec /opt/Synergy/synergy $@"
       ''} $out/bin/synergy
