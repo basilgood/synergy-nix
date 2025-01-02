@@ -146,7 +146,9 @@ in
     openssl
     libappindicator-gtk3
   ];
-
+  extraPreBwrapCmds = ''
+   symlinks+=(--symlink "/etc/Synergy" "/etc/Synergy")
+  '';
   extraInstallCommands =
     let
       desktopItem = (callPackage ./desktop-item.nix { });
@@ -156,7 +158,6 @@ in
     in
     ''
       mkdir -p $out/share/{applications}
-      mkdir -p /etc/Synergy
       ln -sfv ${synergy}/share/icons $out/share/icons
       ln -sfv ${desktopItem} $out/share/applications
       ln -sfv ${writeShellScript "synergy" ''
