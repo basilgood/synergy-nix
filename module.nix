@@ -7,13 +7,15 @@
     after = [ "graphical-session-pre.target" ];
 
     wantedBy = [ "graphical-session.target" ];
-    path = [ pkgs.coreutils-full ];
-    serviceConfig.ExecStart = ''
+    path = with pkgs;[ coreutils synergy ];
+    script = ''
       mkdir $HOME/.synergy
-      ${pkgs.synergy}/bin/synergy-service -d
+      synergy-service -d
     '';
-    serviceConfig.Restart = "on-failure";
-    serviceConfig.RestartSec = 1;
+    serviceConfig = {
+      Restart = "on-failure";
+      RestartSec = 1;
+    };
   };
 
   #systemd.user.services.synergy-core = {
