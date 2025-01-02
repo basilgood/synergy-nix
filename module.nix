@@ -8,5 +8,5 @@
     serviceConfig.Restart = "on-failure";
     serviceConfig.RestartSec = 1;
   };
-  environment.packages = [ pkgs.synergy ];
+  environment.systemPackages = [ pkgs.synergy ];
 }
