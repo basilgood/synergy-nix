@@ -1,12 +1,15 @@
 { lib, pkgs, ... }: {
+  systemd.user.tmpfiles.rules = [
+    "d /.synergy"
+  ];
   systemd.user.services.synergy = {
     description = "Synergy 3 service";
 
     bindsTo = [ "graphical-session.target" ];
     wants = [ "graphical-session-pre.target" ];
     after = [ "graphical-session-pre.target" ];
-
     wantedBy = [ "graphical-session.target" ];
+
     path = with pkgs;[ coreutils synergy ];
     script = ''
       mkdir $HOME/.synergy
