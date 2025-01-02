@@ -64,6 +64,7 @@
 , libxshmfence
 , lz4
 , libz
+, libei
 , openssl
 , libappindicator-gtk3
 , callPackage
@@ -145,6 +146,7 @@ in
     libz
     openssl
     libappindicator-gtk3
+    libei
   ];
   extraBwrapArgs = [
     "--symlink $HOME/.synergy /etc/Synergy"
