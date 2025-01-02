@@ -38,6 +38,6 @@
   #  serviceConfig.Restart = "on-failure";
   #  serviceConfig.RestartSec = 1;
   #};
-
+  networking.firewall.allowedTCPPorts = [ 24800 24802 24804 ];
   environment.systemPackages = [ pkgs.synergy ];
 }
