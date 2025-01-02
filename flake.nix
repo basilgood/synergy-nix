@@ -10,6 +10,12 @@
         synergy = callPackage ./env.nix { };
       };
       overlay = self.overlays.default;
+      nixosModules.synergy = {
+        nixpkgs.overlays = [ self.overlay ];
+        imports = [ ./module.nix ];
+      };
+      nixosModules.default = self.nixosModules.synergy;
+      nixosModule = self.nixosModules.default;
     }
     //
     flake-utils.lib.eachDefaultSystem (system:
