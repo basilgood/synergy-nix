@@ -1,13 +1,9 @@
 { buildFHSEnv
-, nodejs_20
-, nodePackages
+, writeShellScript
 , python3
 , ripgrep
 , bc
-, prefetch-npm-deps
 , jq
-, git
-, git-lfs
 , openssh
 , glib
 , fontconfig
@@ -72,10 +68,14 @@
 , libappindicator-gtk3
 , callPackage
 }:
+let
+  synergy =
+    (callPackage ./package.nix { });
+in
 (buildFHSEnv
 {
-  name = "synergy";
-  targetPkgs = pkgs: [ (callPackage ./package.nix { }) ] ++ [
+  name = "synergy-env";
+  targetPkgs = pkgs: [ synergy ] ++ [
     udev
     alsa-lib
     python3
@@ -146,5 +146,23 @@
     openssl
     libappindicator-gtk3
   ];
-  #runScript = "/opt/Synergy/synergy";
+  extraInstallCommands =
+    let
+      desktopItem = (callPackage ./desktop-item.nix { });
+      synergyBin = writeShellScript "synergy" ''
+        exec $(dirname "$0")/synergy-env -c "exec /opt/Synergy/synergy $@"
+      '';
+      synergyServiceBin = writeShellScript "synergy-service" ''
+        exec $(dirname "$0")/synergy-env -c "exec /opt/Synergy/synergy-service $@"
+      '';
+
+    in
+    ''
+      mkdir -p $out/share/{applications}
+      ln -sfv ${synergy}/share/icons $out/share/icons
+      ln -sfv ${desktopItem} $out/share/applications
+      ln -sfv ${synergyBin} $out/bin/synergy
+      ln -sfv ${synergyBin} $out/bin/synergy-service
+
+    '';
 })
