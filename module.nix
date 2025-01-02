@@ -10,7 +10,10 @@
     after = [ "graphical-session.target" ];
 
     description = "Synergy 3 service";
-    serviceConfig.ExecStart = "${pkgs.synergy}/bin/synergy-service -d";
+    serviceConfig.ExecStart = ''
+      mkdir ~/.synergy
+      ${pkgs.synergy}/bin/synergy-service -d"
+    '';
     serviceConfig.Restart = "on-failure";
     serviceConfig.RestartSec = 1;
   };

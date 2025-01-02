@@ -146,9 +146,9 @@ in
     openssl
     libappindicator-gtk3
   ];
-  extraPreBwrapCmds = ''
-   symlinks+=(--symlink "/etc/Synergy" "/etc/Synergy")
-  '';
+  extraBwrapArgs = [
+    "--symlink $HOME/.synergy /etc/Synergy"
+  ];
   extraInstallCommands =
     let
       desktopItem = (callPackage ./desktop-item.nix { });
