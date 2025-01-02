@@ -67,6 +67,7 @@
 , libei
 , openssl
 , libappindicator-gtk3
+, libXinerama
 , callPackage
 }:
 let
@@ -147,6 +148,7 @@ in
     openssl
     libappindicator-gtk3
     libei
+    libXinerama
   ];
   extraBwrapArgs = [
     "--symlink $HOME/.synergy /etc/Synergy"
