@@ -4,10 +4,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
-  outputs = { self, nixpkgs, dev, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils }:
     {
       overlays.default = final: prev: with final; {
-        synergy = callPackage ./package.nix { };
+        synergy = callPackage ./env.nix { };
       };
       overlay = self.overlays.default;
     }
@@ -21,7 +21,7 @@
       in
       rec {
         packages = {
-          inherit (pkgs) codelyze;
+          inherit (pkgs) synergy;
         };
       }
     );
