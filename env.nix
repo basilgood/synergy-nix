@@ -78,15 +78,10 @@
   targetPkgs = pkgs: [ (callPackage ./package.nix { }) ] ++ [
     udev
     alsa-lib
-    # nodejs_20
-    # nodePackages.typescript-language-server
     python3
     ripgrep
     bc
-    # prefetch-npm-deps
     jq
-    git
-    git-lfs
     openssh
   ] ++ [
     libX11
