@@ -1,5 +1,6 @@
 { lib, pkgs, ... }:
-let synergy = pkgs.callPackage ./env { }; in {
+let synergy = pkgs.callPackage ./env.nix { };
+in {
   systemd.user.tmpfiles.rules = [
     "d /.synergy"
   ];
