@@ -1,17 +1,18 @@
-{ stdenvNoCC, dpkg, fetchurl, ... }:
+{ stdenvNoCC, dpkg, requireFile, ... }:
 
-stdenvNoCC.mkDerivation {
+stdenvNoCC.mkDerivation rec {
   pname = "synergy";
-  version = "3.2.1";
-  src = fetchurl {
-    url = "https://symless.com/synergy/synergy/api/download/synergy-3.2.1-linux-noble-x64.deb";
-    sha256 = "sha256-2rZFF20+APhg64u4IqgVWay8joIgMZzazaN4KL/HnYc=";
+  version = "3.3.1";
+  src = requireFile {
+    name = "${pname}-${version}-linux-noble-x64.deb";
+    url = "https://symless.com/synergy/download/package/synergy-personal-v3/ubuntu-24.04/";
+    sha256 = "13yny6vlrxkfqarskfcwp18abjsizq8r9iqibp9ipyvqd2z1h1l2";
   };
   nativeBuildInputs = [ dpkg ];
   installPhase = ''
     mkdir -p $out/bin
     mv * $out/
     ln -sr "$out/usr/share" "$out/share"
-    ln -sr "$out/Synergy/synergy" "$out/bin/"
+    ln -sr "$out/opt/Synergy/synergy" "$out/bin/"
   '';
 }
