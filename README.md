@@ -35,3 +35,4 @@ path is '/nix/store/h0rwcn06k9zbnbap3f4928fr81r9nncl-synergy-3.3.1-linux-noble-x
 - the second line is the hash that needs to be replaced in package.nix:
   `sha256 = "replace with this hash"`
 - now you can build the package
+  `nix build .#synergy`
