@@ -40,6 +40,7 @@
 , libkrb5
 , libdrm
 , libglvnd
+, libgbm
 , mesa
 , coreutils
 , libxkbcommon
@@ -137,6 +138,7 @@ in
     libkrb5
     libdrm
     libglvnd
+    libgbm
     mesa
     coreutils
     libxkbcommon
