@@ -72,6 +72,7 @@
 , callPackage
 , qt6
 , libnotify
+ , pugixml
 }:
 let
   synergy =
@@ -155,6 +156,7 @@ in
     libXinerama
     qt6.qtbase
     libnotify
+     pugixml
   ];
   extraBwrapArgs = [
     "--symlink $HOME/.synergy /etc/Synergy"
